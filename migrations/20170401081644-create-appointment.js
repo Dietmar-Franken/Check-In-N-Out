@@ -17,6 +17,9 @@ module.exports = {
       worker_id: {
         type: Sequelize.INTEGER
       },
+      isActive: {
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

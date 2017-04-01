@@ -8,14 +8,11 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      username: {
-        type: Sequelize.STRING
+      firebase_id: {
+        type: Sequelize.TEXT
       },
       role: {
         type: Sequelize.INTEGER
-      },
-      firebase_id: {
-        type: Sequelize.TEXT
       },
       firstname: {
         type: Sequelize.STRING
@@ -25,6 +22,9 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING
+      },
+      isInitial: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

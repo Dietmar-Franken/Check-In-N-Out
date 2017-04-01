@@ -5,10 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var firebase = require("firebase");
+var admin = require("firebase-admin");
 
-var users = require('./routes/users');
 var register = require('./routes/register');
 var signIn = require('./routes/signIn');
+var createProfile = require('./routes/createProfile');
 
 var app = express();
 
@@ -24,9 +25,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/user', users);
 app.use('/register', register);
 app.use('/signIn', signIn);
+app.use('/createProfile', createProfile);
 app.use('/', signIn);
 
 // catch 404 and forward to error handler
@@ -58,11 +59,17 @@ var config = {
 };
 firebase.initializeApp(config);
 
+// Initialize serviceAccount for admin
+var serviceAccount = require("./in-n-out-9f5b3-firebase-adminsdk-v4ihp-b6771868ca.json");
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://in-n-out-9f5b3.firebaseio.com/"
+});
+
 // ORM setup
 var Sequelize = require('sequelize');
 var env       = process.env.NODE_ENV || 'development';
 var config    = require('./config/config.json')[env];
-
 var sequelize = new Sequelize(config.database, config.username, config.password, config);
 
 sequelize
