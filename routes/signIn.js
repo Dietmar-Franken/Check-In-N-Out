@@ -18,16 +18,16 @@ router.post('/', function(req, res) {
     var email = req.body.email;
     var password = req.body.password;
     firebase.auth().signInWithEmailAndPassword(email, password).then(function(user) {
-        console.log(user);
         firebase.auth().currentUser.getToken(true).then(function(idToken) {
             admin.auth().verifyIdToken(idToken)
                 .then(function(decodedToken) {
                     var uid = decodedToken.uid;
-                    sequelize.models.User.findOne({
+                    models.User.findOne({
                         where: { firebase_id: uid }
                     }).then(function(user) {
+                        console.log(user);
                         if (user && user.isInitial == true) { // if user w/ correct pass exists
-                            res.redirect('/createProfile', { title: 'Create Profile' });
+                            res.redirect('/createProfile');
                         } else if (!user) { // user doesn't exist
                             res.redirect('/signIn');
                         } else {

@@ -25,7 +25,6 @@ router.post('/', function(req, res) {
                         if (user) {
                             console.log('user already exists');
                         } else {
-                            console.log('user: ', user);
                             models.User.create({
                                 firebase_id: uid,
                                 email: userInfo.user.email,

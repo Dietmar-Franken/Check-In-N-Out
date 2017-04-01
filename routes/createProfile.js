@@ -11,7 +11,13 @@ router.post('/', function(req, res) {
     var firstname = req.body.firstname;
     var lastname = req.body.lastname;
     var role = req.body.role;
-
+    firebase.auth().currentUser.getToken(true).then(function(idToken) {
+        console.log(idToken);
+        admin.auth().verifyIdToken(idToken)
+            .then(function (decodedToken) {
+                var uid = decodedToken.uid;
+            });
+    }); /*
     models.User.findOne({ where: {
         firebase_id: user.uid
     }}).then(function(user) {
@@ -26,7 +32,7 @@ router.post('/', function(req, res) {
         }
     }).then(function() {
         return res.redirect('/createProfile');
-    });
+    }); */
 });
 
 module.exports = router;
