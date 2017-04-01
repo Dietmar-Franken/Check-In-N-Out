@@ -8,4 +8,11 @@ router.get('/', function(req, res) {
     res.render('signIn', { title: 'Sign In' });
 });
 
+router.post('/', function(req, res) {
+    var email = req.body.email;
+    console.log(email);
+    var password = req.body.password;
+    res.redirect('signIn');
+});
+
 module.exports = router;

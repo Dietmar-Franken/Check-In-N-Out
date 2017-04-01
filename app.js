@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var firebase = require("firebase");
 
 var users = require('./routes/users');
 var register = require('./routes/register');
@@ -45,5 +46,16 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+// Initialize Firebase
+var config = {
+    apiKey: "AIzaSyBe7-02KX_ueR9Cf4fUyTTwBvMPiYDpgBU",
+    authDomain: "in-n-out-9f5b3.firebaseapp.com",
+    databaseURL: "https://in-n-out-9f5b3.firebaseio.com",
+    projectId: "in-n-out-9f5b3",
+    storageBucket: "in-n-out-9f5b3.appspot.com",
+    messagingSenderId: "636077247417"
+};
+firebase.initializeApp(config);
 
 module.exports = app;
