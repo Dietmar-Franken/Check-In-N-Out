@@ -10,6 +10,7 @@ var admin = require("firebase-admin");
 var register = require('./routes/register');
 var signIn = require('./routes/signIn');
 var createProfile = require('./routes/createProfile');
+var customerPortal = require('./routes/customerPortal');
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/register', register);
 app.use('/signIn', signIn);
 app.use('/createProfile', createProfile);
+app.use('/customerPortal', customerPortal);
 app.use('/', signIn);
 
 // catch 404 and forward to error handler

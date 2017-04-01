@@ -5,7 +5,7 @@ var admin = require("firebase-admin");
 var models = require('../models');
 
 router.get('/', function(req, res) {
-    res.render('createProfile', { title: 'createProfile' });
+    res.render('createProfile', { title: 'Create Profile' });
 });
 
 router.post('/', function(req, res) {
@@ -26,13 +26,24 @@ router.post('/', function(req, res) {
                                 user.updateAttributes({
                                     firstname: firstname,
                                     lastname: lastname,
+                                    isInitial: false,
                                     role: role
                                 });
+                                if (user.role == 1) { // if worker
+                                    console.log('worker');
+                                } else if (user.role == 2) { // if customer
+                                    res.redirect('/customerPortal');
+                                } else if (user.role == 3) { // if securityPerson
+                                    console.log('securityPeron');
+                                } else {
+                                    console.log("error!");
+                                }
                             } else {
                                 console.log('user doesn\'t exist!');
                             }
-                        }).then(function() {
-                            console.log('profile updated!');
+                        }).catch(function(error) {
+                            var errorCode = error.code;
+                            var errorMessage = error.message;
                         });
                     });
             });
