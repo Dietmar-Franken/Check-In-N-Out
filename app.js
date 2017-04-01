@@ -9,6 +9,7 @@ var firebase = require("firebase");
 var users = require('./routes/users');
 var register = require('./routes/register');
 var signIn = require('./routes/signIn');
+var appointments = require('./routes/appointments');
 
 var app = express();
 
@@ -25,6 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/user', users);
+app.use('/appointments', appointments);
 app.use('/register', register);
 app.use('/signIn', signIn);
 app.use('/', signIn);
