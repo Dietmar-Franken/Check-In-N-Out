@@ -58,4 +58,20 @@ var config = {
 };
 firebase.initializeApp(config);
 
+// ORM setup
+var Sequelize = require('sequelize');
+var env       = process.env.NODE_ENV || 'development';
+var config    = require('./config/config.json')[env];
+
+var sequelize = new Sequelize(config.database, config.username, config.password, config);
+
+sequelize
+    .authenticate()
+    .then(function(err) {
+        console.log('Connection has been established successfully.');
+    })
+    .catch(function (err) {
+        console.log('Unable to connect to the database:', err);
+    });
+
 module.exports = app;
