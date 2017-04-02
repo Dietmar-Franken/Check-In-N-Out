@@ -18,6 +18,7 @@ router.post('/', function(req, res) {
     var email = req.body.email;
     var password = req.body.password;
     firebase.auth().onAuthStateChanged(function (user) {
+        console.log(firebase.auth());
         if (!user) {
             firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
                 console.log(firebase.auth());

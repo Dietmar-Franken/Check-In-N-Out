@@ -26,7 +26,6 @@ router.get('/', function(req, res) {
                                     user_id: user.id
                                 }
                             }).then(function (customer) {
-                                console.log('customerhaha', customer);
                                 models.Appointment.findAll({
                                     where: {
                                         customer_id: customer.id,

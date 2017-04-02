@@ -8,17 +8,16 @@
 </nav>
 <br>
 <ul class="collection">
-    <p>Your Pending Appointments:</p>
+    <h4>Your Pending Appointments:</h4>
     {{#if body.inactiveAppointments}}
         {{#each body.inactiveAppointments}}
             <li class="collection-item avatar">
-                <i class="material-icons circle green">done</i>
+                <i class="material-icons circle red">done</i>
                 <span class="title">{{time}}</span>
                 <br>
                 <p>Worker Name: {{Worker.User.firstname}} {{Worker.User.lastname}}</p>
                 <p>Email: {{Worker.User.email}}</p>
                 <p>Room Number: {{Worker.room_num}}</p>
-                <a href="#!" class="secondary-content"><i class="material-icons">mode_edit</i></a>
             </li>
         {{/each}}
     {{else}}
@@ -26,7 +25,7 @@
     {{/if}}
 </ul>
 <ul class="collection">
-    <p>Your Approved Appointments:</p>
+    <h4>Your Approved Appointments:</h4>
     {{#if body.activeAppointments}}
         {{#each body.activeAppointments}}
             <li class="collection-item avatar">
@@ -36,7 +35,6 @@
                 <p>Worker Name: {{Worker.User.firstname}} {{Worker.User.lastname}}</p>
                 <p>Email: {{Worker.User.email}}</p>
                 <p>Room Number: {{Worker.room_num}}</p>
-                <a href="#!" class="secondary-content"><i class="material-icons">mode_edit</i></a>
             </li>
         {{/each}}
     {{else}}

@@ -26,12 +26,15 @@ router.get('/', function(req, res) {
                                     user_id: user.id
                                 }
                             }).then(function (worker) {
-                                console.log('worker', worker);
                                 models.Appointment.findAll({
                                     where: {
                                         worker_id: worker.id,
                                         isActive: false
-                                    }
+                                    },
+                                    include: [{
+                                        model: models.Customer,
+                                        include: [{ model: models.User }]
+                                    }]
                                 }).then(function (inactiveAppointments) {
                                     if (inactiveAppointments) {
                                         body.inactiveAppointments = inactiveAppointments;
@@ -62,7 +65,11 @@ router.get('/', function(req, res) {
                                     where: {
                                         worker_id: worker.id,
                                         isActive: true
-                                    }
+                                    },
+                                    include: [{
+                                        model: models.Customer,
+                                        include: [{ model: models.User }]
+                                    }]
                                 }).then(function (activeAppointments) {
                                     if (activeAppointments) {
                                         body.activeAppointments = activeAppointments;
@@ -82,6 +89,30 @@ router.get('/', function(req, res) {
             title: 'Worker Portal',
             body: body
         });
+    });
+});
+
+router.post('/', function(req, res) {
+    var appointment_id = req.body.id;
+    models.Appointment.find({
+        where: {
+            id: appointment_id
+        }
+    }).then(function(appointment) {
+       if (appointment) {
+           if (appointment.isActive == true) {
+               appointment.updateAttributes({
+                   isActive: false
+               });
+           } else {
+               appointment.updateAttributes({
+                   isActive: true
+               });
+           }
+           res.redirect('/workerPortal');
+       } else {
+           console.log('no appointment exists');
+       }
     });
 });
 

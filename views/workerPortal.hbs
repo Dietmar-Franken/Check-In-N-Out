@@ -8,16 +8,30 @@
 </nav>
 <br>
 <ul class="collection">
-    <p>Approved Appointments</p>
-    {{#if activeAppointments}}
-        {{#each activeAppointments}}
+    <h4>Approved Appointments</h4>
+    {{#if body.activeAppointments}}
+        {{#each body.activeAppointments}}
             <li class="collection-item avatar">
                 <i class="material-icons circle green">done</i>
                 <span class="title">{{time}}</span>
-                <p>John Doe
-                </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">mode_edit</i></a>
+                <br>
+                <p>Customer Name: {{Customer.User.firstname}} {{Customer.User.lastname}}</p>
+                <p>Email: {{Customer.User.email}}</p>
+                <p>Phone Number: {{Customer.phone_num}}</p>
+                <a href="#unapprove{{id}}" class="secondary-content"><i class="material-icons">mode_edit</i></a>
             </li>
+            <div id="unapprove{{id}}" class="modal">
+                <div class="modal-content center-align">
+                    <h4>Unapprove Appointment for {{Customer.User.firstname}} {{Customer.User.lastname}}</h4>
+                    <br>
+                    <p>Time: {{time}}</p>
+                    <p>Email: {{Customer.User.email}}</p>
+                    <p>Phone Number: {{Customer.phone_num}}</p>
+                </div>
+                <div class="center-align">
+                    <a id="confirmUnapprove{{id}}" class="confirmButton modal-action modal-close waves-effect waves-green btn-flat">Unapprove</a>
+                </div>
+            </div>
         {{/each}}
     {{else}}
         <p>You have not approved any appointments.</p>
@@ -25,15 +39,29 @@
 </ul>
 <br>
 <ul class="collection">
-    <p>Pending Appointments</p>
-    {{#if inactiveAppointments}}
-        {{#each inactiveAppointments}}
+    <h4>Pending Appointments</h4>
+    {{#if body.inactiveAppointments}}
+        {{#each body.inactiveAppointments}}
             <li class="collection-item avatar">
-                <i class="material-icons circle green">done</i>
+                <i class="material-icons circle red">done</i>
                 <span class="title">{{time}}</span>
-                <p>John Doe
-                </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">mode_edit</i></a>
+                <br>
+                <p>Customer Name: {{Customer.User.firstname}} {{Customer.User.lastname}}</p>
+                <p>Email: {{Customer.User.email}}</p>
+                <p>Phone Number: {{Customer.phone_num}}</p>
+                <a href="#approve{{id}}" class="secondary-content"><i class="material-icons">mode_edit</i></a>
+            </li>
+            <div id="approve{{id}}" class="modal">
+                <div class="modal-content center-align">
+                    <h4>Approve Appointment for {{Customer.User.firstname}} {{Customer.User.lastname}}</h4>
+                    <p>Time: {{time}}</p>
+                    <p>Email: {{Customer.User.email}}</p>
+                    <p>Phone Number: {{Customer.phone_num}}</p>
+                </div>
+                <div class="center-align">
+                    <a id="confirmApprove{{id}}" class="confirmButton modal-action modal-close waves-effect waves-green btn-flat">Approve</a>
+                </div>
+            </div>
             </li>
         {{/each}}
     {{else}}
@@ -50,6 +78,29 @@
             selectMonths: true, // Creates a dropdown to control month
             selectYears: 1 // Creates a dropdown of 15 years to control year
         });
-
+        $('.confirmButton').click(function() {
+           if (this.id) {
+               var letter = this.id.slice(7, this.id.length)[0];
+               if (letter == 'A') {
+                    $.ajax({
+                        url: 'workerPortal',
+                        type: 'POST',
+                        data: {'id': this.id.slice(14, this.id.length) },
+                        success: function (result) {
+                            window.location.reload(true);
+                        }
+                    });
+               } else if (letter == 'U') {
+                   $.ajax({
+                       url: '/workerPortal',
+                       type: 'POST',
+                       data: {'id': this.id.slice(16, this.id.length) },
+                       success: function (result) {
+                           window.location.reload(true);
+                       }
+                   });
+               }
+           }
+        });
     });
 </script>
