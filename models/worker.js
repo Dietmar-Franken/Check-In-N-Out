@@ -3,7 +3,7 @@ module.exports = function(sequelize, DataTypes) {
   var Worker = sequelize.define('Worker', {
     user_id: DataTypes.INTEGER,
     room_num: DataTypes.TEXT,
-    phone_num: DataTypes.INTEGER
+    phone_num: DataTypes.TEXT
   }, {
     classMethods: {
       associate: function(models) {

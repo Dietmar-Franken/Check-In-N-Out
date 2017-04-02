@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.TEXT
       },
       phone_num: {
-        type: Sequelize.INTEGER
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,

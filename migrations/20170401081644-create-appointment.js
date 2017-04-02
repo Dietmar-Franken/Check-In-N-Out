@@ -20,6 +20,9 @@ module.exports = {
       isActive: {
         type: Sequelize.BOOLEAN
       },
+      isCheckedIn: {
+          type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

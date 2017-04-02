@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       phone_num: {
-        type: Sequelize.INTEGER
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,

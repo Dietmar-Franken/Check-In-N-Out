@@ -4,7 +4,8 @@ module.exports = function(sequelize, DataTypes) {
     time: DataTypes.DATE,
     customer_id: DataTypes.INTEGER,
     worker_id: DataTypes.INTEGER,
-    isActive: DataTypes.BOOLEAN
+    isActive: DataTypes.BOOLEAN,
+    isCheckedIn: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {

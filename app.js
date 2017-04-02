@@ -11,6 +11,7 @@ var register = require('./routes/register');
 var signIn = require('./routes/signIn');
 var createProfile = require('./routes/createProfile');
 var customerPortal = require('./routes/customerPortal');
+var workerPortal = require('./routes/workerPortal');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use('/register', register);
 app.use('/signIn', signIn);
 app.use('/createProfile', createProfile);
 app.use('/customerPortal', customerPortal);
+app.use('/workerPortal', workerPortal);
 app.use('/', signIn);
 
 // catch 404 and forward to error handler
