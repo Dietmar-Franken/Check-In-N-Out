@@ -9,8 +9,8 @@
 <br>
 <ul class="collection">
     <p>Your Pending Appointments:</p>
-    {{#if inactiveAppointments}}
-        {{#each inactiveAppointments}}
+    {{#if body.inactiveAppointments}}
+        {{#each body.inactiveAppointments}}
             <li class="collection-item avatar">
                 <i class="material-icons circle green">done</i>
                 <span class="title">{{time}}</span>
@@ -25,8 +25,8 @@
 </ul>
 <ul class="collection">
     <p>Your Approved Appointments:</p>
-    {{#if activeAppointments}}
-        {{#each activeAppointments}}
+    {{#if body.activeAppointments}}
+        {{#each body.activeAppointments}}
             <li class="collection-item avatar">
                 <i class="material-icons circle green">done</i>
                 <span class="title">{{time}}</span>
@@ -47,13 +47,14 @@
     <div class="modal-content">
         <h4 class="center-align">New Appointment</h4>
         <div class="row">
-            <form action="/createAppointment" method="post" class="col s12" id="createAppointment">
+            <form action="/customerPortal" method="post" class="col s12" id="customerPortal">
                 <div class="row">
                     <div class="input-field col s12">
                         <select name="worker">
-                            {{#if workers}}
-                                {{#each workers}}
-                                    <option value={{id}}>{{firstname}}{{lastname}}</option>
+                            {{#if body.workers}}
+                                hi
+                                {{#each body.workers}}
+                                    <option value={{id}}>{{User.firstname}} {{User.lastname}}</option>
                                 {{/each}}
                             {{else}}
                                 <option value="" disabled>No Workers!</option>
@@ -71,18 +72,17 @@
                     </select>
                     <label>Worker</label>
                 </div> -->
-
-                <form action="/action_page.php">
+                <div class="row">
                     Select a time:
                     <input type="time" name="usr_time">
-                </form>
+                </div>
 
 
             </form>
         </div>
     </div>
     <div class="modal-footer">
-        <button form="createAppointment" class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <button form="customerPortal" class="btn waves-effect waves-light" type="submit" name="action">Submit
         </button>
     </div>
 </div>

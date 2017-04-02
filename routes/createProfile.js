@@ -30,11 +30,11 @@ router.post('/', function(req, res) {
                                     role: role
                                 });
                                 if (user.role == 1) { // if worker
-                                    console.log('worker');
+                                    res.redirect('/workerPortal');
                                 } else if (user.role == 2) { // if customer
                                     res.redirect('/customerPortal');
                                 } else if (user.role == 3) { // if securityPerson
-                                    console.log('securityPeron');
+                                    console.log('securityPerson');
                                 } else {
                                     console.log("error!");
                                 }
