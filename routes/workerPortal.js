@@ -16,13 +16,11 @@ router.get('/', function(req, res) {
                 admin.auth().verifyIdToken(idToken)
                     .then(function (decodedToken) {
                         var uid = decodedToken.uid;
-                        console.log('wooaooh', idToken);
                         models.User.findOne({
                             where: {
                                 firebase_id: uid
                             }
                         }).then(function (user) {
-                            console.log('user', user);
                             models.Worker.findOne({
                                 where: {
                                     user_id: user.id

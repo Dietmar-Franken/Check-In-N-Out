@@ -2,16 +2,15 @@
     <div class="nav-wrapper">
         <a href="#" class="brand-logo">{{title}}</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="appointments">Appointments</a></li>
             <li><a href="">Logout</a></li>
         </ul>
     </div>
 </nav>
 <br>
 <ul class="collection">
-    <p>Your Current Applications</p>
-    {{#if appointments}}
-        {{#each applications}}
+    <p>Your Pending Appointments:</p>
+    {{#if inactiveAppointments}}
+        {{#each inactiveAppointments}}
             <li class="collection-item avatar">
                 <i class="material-icons circle green">done</i>
                 <span class="title">{{time}}</span>
@@ -21,7 +20,23 @@
             </li>
         {{/each}}
     {{else}}
-        <p>You have no applications.</p>
+        <p>You have no pending appointments.</p>
+    {{/if}}
+</ul>
+<ul class="collection">
+    <p>Your Approved Appointments:</p>
+    {{#if activeAppointments}}
+        {{#each activeAppointments}}
+            <li class="collection-item avatar">
+                <i class="material-icons circle green">done</i>
+                <span class="title">{{time}}</span>
+                <p>John Doe
+                </p>
+                <a href="#!" class="secondary-content"><i class="material-icons">mode_edit</i></a>
+            </li>
+        {{/each}}
+    {{else}}
+        <p>You have no approved appointments.</p>
     {{/if}}
 </ul>
 <div class="modal-footer">

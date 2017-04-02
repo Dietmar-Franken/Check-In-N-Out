@@ -16,17 +16,29 @@ router.get('/', function(req, res) {
                 admin.auth().verifyIdToken(idToken)
                     .then(function (decodedToken) {
                         var uid = decodedToken.uid;
-                        models.Appointment.findAll({
+                        models.User.findOne({
                             where: {
-                                isActive: false
+                                firebase_id: uid
                             }
-                        }).then(function (unavailableAppointments) {
-                            if (unavailableAppointments) {
-                                body.unavailableAppointments = unavailableAppointments;
-                            } else {
-                                console.log('no unavailable appointments');
-                            }
-                            callback();
+                        }).then(function (user) {
+                            models.Customer.findOne({
+                                where: {
+                                    user_id: user.id
+                                }
+                            }).then(function (customer) {
+                                console.log('customerhaha', customer);
+                                models.Appointment.findAll({
+                                    where: {
+                                        customer_id: customer.id,
+                                        isActive: false
+                                    }
+                                }).then(function (inactiveAppointments) {
+                                    if (inactiveAppointments) {
+                                        body.inactiveAppointments = inactiveAppointments;
+                                    }
+                                    callback();
+                                });
+                            });
                         });
                     });
             });
@@ -36,17 +48,28 @@ router.get('/', function(req, res) {
                 admin.auth().verifyIdToken(idToken)
                     .then(function (decodedToken) {
                         var uid = decodedToken.uid;
-                        models.Appointment.findAll({
+                        models.User.findOne({
                             where: {
-                                isActive: true
+                                firebase_id: uid
                             }
-                        }).then(function (availableAppointments) {
-                            if (availableAppointments) {
-                                body.availableAppointments = availableAppointments;
-                            } else {
-                                console.log('no available appointments');
-                            }
-                            callback();
+                        }).then(function (user) {
+                            models.Customer.findOne({
+                                where: {
+                                    user_id: user.id
+                                }
+                            }).then(function (customer) {
+                                models.Appointment.findAll({
+                                    where: {
+                                        customer_id: customer.id,
+                                        isActive: true
+                                    }
+                                }).then(function (activeAppointments) {
+                                    if (activeAppointments) {
+                                        body.activeAppointments = activeAppointments;
+                                    }
+                                    callback();
+                                });
+                            });
                         });
                     });
             });

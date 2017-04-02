@@ -8,9 +8,9 @@
 </nav>
 <br>
 <ul class="collection">
-    <p>Your Current Applications</p>
-    {{#if appointments}}
-        {{#each applications}}
+    <p>Approved Appointments</p>
+    {{#if activeAppointments}}
+        {{#each activeAppointments}}
             <li class="collection-item avatar">
                 <i class="material-icons circle green">done</i>
                 <span class="title">{{time}}</span>
@@ -20,49 +20,26 @@
             </li>
         {{/each}}
     {{else}}
-        <p>You have no applications.</p>
+        <p>You have not approved any appointments.</p>
     {{/if}}
 </ul>
-<div class="modal-footer">
-    <a class="waves-effect waves-light btn" href="#addModal">Schedule An Appointment</a>
-</div>
-
-<div id="addModal" class="modal">
-    <div class="modal-content">
-        <h4 class="center-align">New Appointment</h4>
-        <div class="row">
-            <form action="/createAppointment" method="post" class="col s12" id="createAppointment">
-                <div class="row">
-                    <div class="input-field col s12">
-                        <select name="worker">
-                            {{#if workers}}
-                                {{#each workers}}
-                                    <!--<option value={{id}}>{{firstname}}{{lastname}}</option>-->
-                                {{/each}}
-                            {{else}}
-                                <option value="" disabled>No Workers!</option>
-                            {{/if}}
-                        </select>
-                        <label>Worker</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <input type="date" class="datepicker">
-                </div>
-                <!-- <div class="input-field col s12">
-                    <select name="time">
-                            <option value="" disabled>No Workers!</option>
-                    </select>
-                    <label>Worker</label>
-                </div> -->
-            </form>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button form="createAppointment" class="btn waves-effect waves-light" type="submit" name="action">Submit
-        </button>
-    </div>
-</div>
+<br>
+<ul class="collection">
+    <p>Pending Appointments</p>
+    {{#if inactiveAppointments}}
+        {{#each inactiveAppointments}}
+            <li class="collection-item avatar">
+                <i class="material-icons circle green">done</i>
+                <span class="title">{{time}}</span>
+                <p>John Doe
+                </p>
+                <a href="#!" class="secondary-content"><i class="material-icons">mode_edit</i></a>
+            </li>
+        {{/each}}
+    {{else}}
+        <p>You have no appointments to approve.</p>
+    {{/if}}
+</ul>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
 <script>

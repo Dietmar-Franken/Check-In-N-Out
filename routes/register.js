@@ -42,7 +42,7 @@ router.post('/', function(req, res) {
     }).catch(function (error) {
         var errorCode = error.code;
         var errorMessage = error.message;
-        res.redirect('signIn');
+        res.redirect('register');
     });
 });
 
