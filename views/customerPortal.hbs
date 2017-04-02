@@ -38,7 +38,7 @@
                         <select name="worker">
                             {{#if workers}}
                                 {{#each workers}}
-                                    <!--<option value={{id}}>{{firstname}}{{lastname}}</option>-->
+                                    <option value={{id}}>{{firstname}}{{lastname}}</option>
                                 {{/each}}
                             {{else}}
                                 <option value="" disabled>No Workers!</option>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <input type="date" class="datepicker">
+                    <input type="date" name="date" class="datepicker">
                 </div>
                 <!-- <div class="input-field col s12">
                     <select name="time">
@@ -56,6 +56,13 @@
                     </select>
                     <label>Worker</label>
                 </div> -->
+
+                <form action="/action_page.php">
+                    Select a time:
+                    <input type="time" name="usr_time">
+                </form>
+
+
             </form>
         </div>
     </div>
