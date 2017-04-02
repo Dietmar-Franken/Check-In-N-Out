@@ -6,3 +6,5 @@ body {
 a {
   color: #00B7FF;
 }
+
+.modal { width: 50% !important ; height: 200% !important ; }

@@ -4,8 +4,16 @@ var firebase = require('firebase');
 var admin = require("firebase-admin");
 var models = require('../models');
 
+/**
+ * Renders a list of all appointments in the customer portal index.
+ */
 router.get('/', function(req, res) {
-    res.render('customerPortal', { title: 'Customer Portal' });
+    models.Appointment.findAll().then(function(appointments) {
+        return res.render('customerPortal', {
+            title: 'Customer Portal',
+            appointments: appointments
+        })
+    });
 });
 
 module.exports = router;

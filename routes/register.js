@@ -42,9 +42,11 @@ router.post('/', function(req, res) {
                                     });
                                 }
                             }).then(function () {
-                                return res.redirect('/createProfile');
+                                res.redirect('/createProfile');
                             });
-                        });
+                        }).catch(function(error) {
+                            console.log('error');
+                    });
                 });
             }).catch(function (error) {
                 var errorCode = error.code;
