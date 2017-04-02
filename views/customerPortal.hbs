@@ -1,8 +1,8 @@
 <nav>
     <div class="nav-wrapper">
-        <a href="#" class="brand-logo">{{title}}</a>
+        <a href="#" class="brand-logo center">{{title}}</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="">Logout</a></li>
+            <li><a href="/signIn">Logout</a></li>
         </ul>
     </div>
 </nav>
@@ -12,7 +12,7 @@
     {{#if body.inactiveAppointments}}
         {{#each body.inactiveAppointments}}
             <li class="collection-item avatar">
-                <i class="material-icons circle red">done</i>
+                <i class="material-icons circle red">highlight_off</i>
                 <span class="title">{{time}}</span>
                 <br>
                 <p>Worker Name: {{Worker.User.firstname}} {{Worker.User.lastname}}</p>
@@ -45,13 +45,13 @@
     <a class="waves-effect waves-light btn" href="#addModal">Schedule An Appointment</a>
 </div>
 
-<div id="addModal" class="modal">
+<div id="addModal" class="modal long-modal">
     <div class="modal-content">
         <h4 class="center-align">New Appointment</h4>
         <div class="row">
             <form action="/customerPortal" method="post" class="col s12" id="customerPortal">
                 <div class="row">
-                    <div class="input-field col s12">
+                    <div class="input-field col s6">
                         <select name="worker">
                             {{#if body.workers}}
                                 hi
@@ -66,6 +66,7 @@
                     </div>
                 </div>
                 <div class="row">
+                    Pick a date:
                     <input type="date" name="date" class="datepicker">
                 </div>
                 <!-- <div class="input-field col s12">
@@ -78,8 +79,6 @@
                     Select a time:
                     <input type="time" name="usr_time">
                 </div>
-
-
             </form>
         </div>
     </div>
@@ -87,6 +86,7 @@
         <button form="customerPortal" class="btn waves-effect waves-light" type="submit" name="action">Submit
         </button>
     </div>
+    <br>
 </div>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
