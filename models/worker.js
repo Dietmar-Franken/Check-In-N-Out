@@ -8,6 +8,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
           Worker.belongsTo(sequelize.models.User, { foreignKey: 'user_id' });
+          Worker.hasOne(sequelize.models.Appointment, { foreignKey: 'worker_id' });
       }
     }
   });

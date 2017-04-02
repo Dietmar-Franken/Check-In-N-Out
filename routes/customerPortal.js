@@ -31,7 +31,11 @@ router.get('/', function(req, res) {
                                     where: {
                                         customer_id: customer.id,
                                         isActive: false
-                                    }
+                                    },
+                                    include: [{
+                                        model: models.Worker,
+                                        include: [{ model: models.User }]
+                                    }]
                                 }).then(function (inactiveAppointments) {
                                     if (inactiveAppointments) {
                                         body.inactiveAppointments = inactiveAppointments;
@@ -62,7 +66,11 @@ router.get('/', function(req, res) {
                                     where: {
                                         customer_id: customer.id,
                                         isActive: true
-                                    }
+                                    },
+                                    include: [{
+                                        model: models.Worker,
+                                        include: [{ model: models.User }]
+                                    }]
                                 }).then(function (activeAppointments) {
                                     if (activeAppointments) {
                                         body.activeAppointments = activeAppointments;
@@ -119,6 +127,7 @@ router.post('/', function(req, res) {
                     }).then(function(customer) {
                         if (customer) {
                             models.Appointment.create({
+                                time: new Date(date + " " + appointTime),
                                 customer_id: customer.id,
                                 worker_id: work_id,
                                 isActive: false,

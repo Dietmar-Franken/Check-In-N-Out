@@ -9,7 +9,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        Appointment.belongsTo(sequelize.models.Appointment, { foreignKey: 'customer_id'});
+        Appointment.belongsTo(sequelize.models.Customer, { foreignKey: 'customer_id'});
+        Appointment.belongsTo(sequelize.models.Worker, { foreignKey: 'worker_id'});
       }
     }
   });
